@@ -6,9 +6,9 @@ from sklearn.neighbors import NearestNeighbors
 bert_model = TFBertModel.from_pretrained('bert-base-uncased')
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
-
+# Defining Custom_object as this trained model is having TFBertModel Layer which tensorflow does not understands by default.
 # Load trained embedding model
-embedding_model = tf.keras.models.load_model('embedding_model')
+embedding_model = tf.keras.models.load_model('embedding_model.h5', custom_objects={"TFBertModel": transformers.TFBertModel})
 
 # Get word embedding for all words in the vocabulary
 vocabulary = ['word1', 'word2', 'word3', 'word4', 'word5']
